@@ -1,7 +1,7 @@
 #include <iostream>
 #include <Windows.h>
 #include <TlHelp32.h>
-#include "Header.h"
+#include "Offsets.h"
 
 
 uintptr_t moduleBase;
