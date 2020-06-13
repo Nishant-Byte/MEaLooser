@@ -1,0 +1,113 @@
+    --SETTINGS AND VALUES
+     
+    --Standard no recoil settings, setting min and max means, that you roll values inbetween the two values, and hopefully making the script seem at bit more legit.
+    --Please remember this is a simple no recoil script and can only move your mouse down vertically at a varying speed.
+    --if you want flat value delete="math.random(AltPressSpeedMin,AltPressSpeedMax)" and input value. Example: "Sleep(30)", this works for all of them.
+    --Please try out different settings to fit it to your sensitivity and feel, personally i keep the mp7 as my baseline for norecoil and Famas for my rapidfire. dpi=600, sens ca. 5,5
+    --heard something about keeping values local as sort of an etiquette for coders, velp sorry if all the global values hurts your eyes.
+     
+    --NoRecoil
+    NoRecoilMin=1,6				--Change this			<-this is how long you mouse travels from one loop/rotation of the noracoil function
+    NoRecoilMax=3			--Change this
+    		
+    HorizontalRecoilModifier=0		--try this if your gun only moves to one side, I will not be making profiles for this script, but you can keep it open and change values for each gun when in game.
+     
+    SleepNRMin=6				--Change this			<-this is how long between loops, both make your mouse go faster downwards
+    SleepNRMax=17				--Change this
+    		
+     
+    --Tagging settings(ms), this is also a recoil predelay, the longer this takes, the longer it takes for your no recoil to start
+    AltPressSpeedMin=20			--Change this			
+    AltPressSpeedMax=30			--Change this			<-this is the delay between pressing and releasing the alt button
+    	
+    InBetweenSpeedMin=20		--Change this			<-this is the delay between button presses
+    InBetweenSpeedMax=50		--Change this
+     
+     
+    --Rapidfire
+    PressSpeedMin=10			--Change this			<-this is the delay between pressing and releasing left click
+    PressSpeedMax=30			--Change this
+    		
+    NoRecoilRFMin=14			--Change this			<-this is recoil reduction, recoil made for Fal and Famas, too much for pistol
+    NoRecoilRFMax=26			--Change this
+    	
+     
+    SleepNRFMin=35			--Change this			<-this is the delay between clicks
+    SleepNRFMax=125			--Change this
+     
+     
+    --BINDS
+     
+    --Enable/Disable, only scrollock capslock and numlock work for this bind: "scrolllock", "capslock", "numlock", you canalso delete: "	if IsKeyLockOn(LockKey)then		", if you want it all at all times.
+    LockKey="numlock"		
+     
+    --Norecoil bind									Im too lazy to make an alternative bind to keyboard, if you ask nicely and i have time i might do it for you.
+    LC=1		--Left click 1 is the click type this means 3 will be right click(Only works for mousebuttons)
+    RC=3	--right click
+     
+    --Tagbind, should work for all keyboard buttons, remember to use left or right for modifiers: "lalt", "lshift"
+    Autotagmfer="lalt"		
+     
+    --Rapidfirebind
+    LCRF=1				--just leftclick
+    Rapidfirebutton=4		-- tis my forward key for thumb use, tried to make arg events work to give more keybind possibilities, but i always found they had a weird delay/rythm to them making them unreliable.
+     
+    --FUNCTIONS 						don't see any reason why wou should touch anything below this point but be my guest.	
+    			
+    function RapidFire()			
+    	repeat
+    	PressMouseButton(LCRF)
+    	Sleep(math.random(PressSpeedMin,PressSpeedMax))
+    	ReleaseMouseButton(LCRF)
+    	Sleep(math.random(PressSpeedMin,PressSpeedMax))
+    	ReleaseKey(Autotagmfer)
+    	MoveMouseRelative(0,math.random(NoRecoilRFMin,NoRecoilRFMax))
+    	Sleep(math.random(SleepNRFMin,SleepNRFMax)) 
+    until not IsMouseButtonPressed(Rapidfirebutton)
+    end
+     
+    function Autotag()
+    	PressKey(Autotagmfer)		
+    	Sleep(math.random(AltPressSpeedMin,AltPressSpeedMax))
+    	ReleaseKey(Autotagmfer)
+    	Sleep(math.random(InBetweenSpeedMin,InBetweenSpeedMax))
+    	PressKey(Autotagmfer)
+    	Sleep(math.random(AltPressSpeedMin,AltPressSpeedMax))
+    	ReleaseKey(Autotagmfer)		
+    end
+     
+    function NoRecoil()
+    	repeat
+    	MoveMouseRelative(HorizontalRecoilModifier,math.random(NoRecoilMin,NoRecoilMax))
+    	Sleep(math.random(SleepNRMin,SleepNRMax))
+    until not IsMouseButtonPressed(LC)
+    end
+     
+    --MAGIC AND WOODOO					
+    function OnEvent(event, arg)	
+    if IsKeyLockOn(LockKey) then			
+    OutputLogMessage("event = %s, arg = %s\n", event, arg)
+    			EnablePrimaryMouseButtonEvents(true)
+    end
+     
+     
+    if IsKeyLockOn(LockKey)then
+     
+    	if IsMouseButtonPressed(RC)then	    					                      
+    		repeat
+     
+    	if IsMouseButtonPressed(LC)  then
+    										OutputLogMessage("Autotag NoRecoil ")			
+    				Autotag()
+    		NoRecoil()
+     
+    	elseif  IsMouseButtonPressed(Rapidfirebutton) then
+    										OutputLogMessage("Autotag & RapidFire ")
+    				Autotag()	
+    		RapidFire()	
+    			
+    		end
+    	until not IsMouseButtonPressed(RC)
+    	end	
+    end
+    end
