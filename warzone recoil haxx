@@ -13,7 +13,7 @@
     --6. You can change these two binds in the "BINDS" section of the script, do as the script says.
     --7. If you want to change the speed of norecoil, Use simple settings: REEcoil=1000 and change it. Otherwise change these values(NoRecoilMin,NoRecoilMax,SleepNRMin,SleepNRMax,NoRecoilMinHIGH,NoRecoilMaxHIGH,SleepNRMinHIGH,SleepNRMaxHIGH)
     --7,1. if you don't want random numbers just choose the same numbers in max and min
-    --7,2. Settings are arranged in min and max, this means means, that you roll values inbetween your max and min value, this hopefully makes the script seem at bit more legit.
+    --7,2. Seettings are arranged in min and max, this means means, that you roll values inbetween your max and min value, this hopefully makes the script seem at bit more legit.
     --11.If you want to change the Trigger speed of Rapidfire and RapidfireHIGH, change these values(PressSpeedMin, PressSpeedMax,NoRecoilRFMin,NoRecoilRFMax,SleepNRFMin,SleepNRFMax, and so on)
     --12. If you wanna change binds like rapidfire or your ping button go to "BINDS" section, follow instructions.
     --13. if you wanna remove Rapidfire go to "MAGIC AND WOODOO" and delete--"elseif  IsMouseButtonPressed(Rapidfirebutton) then Autotag() RapidFire()"
